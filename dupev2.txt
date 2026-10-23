@@ -1,0 +1,137 @@
+-- Azi GunShop Purchase UI | Debugged
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+local LP = Players.LocalPlayer
+local PG = LP:WaitForChild("PlayerGui")
+
+-- ─── UI SETUP ─────────────────────────────────────────────
+local sg = Instance.new("ScreenGui")
+sg.Name = "AziGunShop"
+sg.ResetOnSpawn = false
+sg.DisplayOrder = 999
+sg.Parent = PG
+
+local main = Instance.new("Frame")
+main.Size = UDim2.new(0, 240, 0, 180)
+main.Position = UDim2.new(0.5, -120, 0.5, -90)
+main.BackgroundColor3 = Color3.fromRGB(15, 15, 18)
+main.BorderSizePixel = 0
+main.Active = true
+main.Parent = sg
+local mc = Instance.new("UICorner"); mc.CornerRadius = UDim.new(0, 8); mc.Parent = main
+local ms = Instance.new("UIStroke"); ms.Color = Color3.fromRGB(150, 0, 0); ms.Thickness = 2; ms.Parent = main
+
+-- Top Bar
+local topBar = Instance.new("Frame")
+topBar.Size = UDim2.new(1, 0, 0, 30)
+topBar.BackgroundColor3 = Color3.fromRGB(20, 20, 22)
+topBar.BorderSizePixel = 0
+topBar.Parent = main
+local tc = Instance.new("UICorner"); tc.CornerRadius = UDim.new(0, 8); tc.Parent = topBar
+local topFix = Instance.new("Frame"); topFix.Size = UDim2.new(1, 0, 0, 10); topFix.Position = UDim2.new(0, 0, 1, -10); topFix.BackgroundColor3 = Color3.fromRGB(20, 20, 22); topFix.BorderSizePixel = 0; topFix.Parent = topBar
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -20, 1, 0); title.Position = UDim2.new(0, 10, 0, 0)
+title.BackgroundTransparency = 1; title.Text = "GunShop Purchase"
+title.TextColor3 = Color3.fromRGB(255, 255, 255); title.Font = Enum.Font.GothamBold
+title.TextSize = 13; title.TextXAlignment = Enum.TextXAlignment.Left; title.Parent = topBar
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 20, 0, 20); closeBtn.Position = UDim2.new(1, -25, 0, 5)
+closeBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0); closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255); closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 10; closeBtn.Parent = topBar
+local cc = Instance.new("UICorner"); cc.CornerRadius = UDim.new(0, 4); cc.Parent = closeBtn
+closeBtn.MouseButton1Click:Connect(function() main.Visible = false end)
+
+-- Tool Input
+local toolLbl = Instance.new("TextLabel")
+toolLbl.Size = UDim2.new(0, 100, 0, 20); toolLbl.Position = UDim2.new(0, 10, 0, 40)
+toolLbl.BackgroundTransparency = 1; toolLbl.Text = "Tool Name"
+toolLbl.TextColor3 = Color3.fromRGB(200, 200, 200); toolLbl.Font = Enum.Font.Gotham
+toolLbl.TextSize = 12; toolLbl.TextXAlignment = Enum.TextXAlignment.Left; toolLbl.Parent = main
+
+local toolBox = Instance.new("TextBox")
+toolBox.Size = UDim2.new(1, -20, 0, 30); toolBox.Position = UDim2.new(0, 10, 0, 62)
+toolBox.BackgroundColor3 = Color3.fromRGB(10, 10, 12); toolBox.BorderColor3 = Color3.fromRGB(50, 50, 50)
+toolBox.BorderSizePixel = 1; toolBox.PlaceholderText = "e.g. SP"
+toolBox.Text = ""; toolBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+toolBox.Font = Enum.Font.Gotham; toolBox.TextSize = 12; toolBox.Parent = main
+local tbc = Instance.new("UICorner"); tbc.CornerRadius = UDim.new(0, 6); tbc.Parent = toolBox
+
+-- Amount Input
+local amountLbl = Instance.new("TextLabel")
+amountLbl.Size = UDim2.new(0, 100, 0, 20); amountLbl.Position = UDim2.new(0, 10, 0, 100)
+amountLbl.BackgroundTransparency = 1; amountLbl.Text = "Amount"
+amountLbl.TextColor3 = Color3.fromRGB(200, 200, 200); amountLbl.Font = Enum.Font.Gotham
+amountLbl.TextSize = 12; amountLbl.TextXAlignment = Enum.TextXAlignment.Left; amountLbl.Parent = main
+
+local amountBox = Instance.new("TextBox")
+amountBox.Size = UDim2.new(1, -20, 0, 30); amountBox.Position = UDim2.new(0, 10, 0, 122)
+amountBox.BackgroundColor3 = Color3.fromRGB(10, 10, 12); amountBox.BorderColor3 = Color3.fromRGB(50, 50, 50)
+amountBox.BorderSizePixel = 1; amountBox.PlaceholderText = "e.g. -1"
+amountBox.Text = "-1"; amountBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+amountBox.Font = Enum.Font.Gotham; amountBox.TextSize = 12; amountBox.Parent = main
+local abc = Instance.new("UICorner"); abc.CornerRadius = UDim.new(0, 6); abc.Parent = amountBox
+
+-- Fire Button
+local fireBtn = Instance.new("TextButton")
+fireBtn.Size = UDim2.new(1, -20, 0, 32); fireBtn.Position = UDim2.new(0, 10, 0, 165)
+fireBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0); fireBtn.Text = "PURCHASE"
+fireBtn.TextColor3 = Color3.fromRGB(255, 255, 255); fireBtn.Font = Enum.Font.GothamBold
+fireBtn.TextSize = 12; fireBtn.Parent = main
+local fbc = Instance.new("UICorner"); fbc.CornerRadius = UDim.new(0, 6); fbc.Parent = fireBtn
+
+main.Size = UDim2.new(0, 240, 0, 210)
+main.Position = UDim2.new(0.5, -120, 0.5, -105)
+
+-- ─── FIRE EVENT LOGIC ─────────────────────────────────────
+fireBtn.MouseButton1Click:Connect(function()
+    local toolName = toolBox.Text
+    local amount = tonumber(amountBox.Text) or -1
+
+    if toolName == "" then
+        fireBtn.Text = "ENTER TOOL NAME"
+        fireBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        task.wait(1.5)
+        fireBtn.Text = "PURCHASE"
+        fireBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+        return
+    end
+
+    local success, err = pcall(function()
+        local RS = game:GetService("ReplicatedStorage")
+        local Event = RS:WaitForChild("GunShop"):WaitForChild("Events"):WaitForChild("Purchase")
+        Event:FireServer(toolName, amount)
+    end)
+
+    if success then
+        fireBtn.Text = "PURCHASED!"
+        fireBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+    else
+        fireBtn.Text = "EVENT FAILED"
+        fireBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        warn("Azi Purchase Error: " .. tostring(err))
+    end
+
+    task.wait(1.5)
+    fireBtn.Text = "PURCHASE"
+    fireBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+end)
+
+-- ─── DRAG LOGIC ───────────────────────────────────────────
+local dragging, dragStart, startPos
+topBar.InputBegan:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+        dragging = true; dragStart = i.Position; startPos = main.Position
+    end
+end)
+UIS.InputEnded:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then dragging = false end
+end)
+UIS.InputChanged:Connect(function(i)
+    if dragging and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+        local d = i.Position - dragStart
+        main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X, startPos.Y.Scale, startPos.Y.Offset + d.Y)
+    end
+end)
